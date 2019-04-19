@@ -47,12 +47,12 @@ IMAGE_URL=${REGISTRY}/$REGISTRY_NAMESPACE/${IMAGE_NAME}:${CI_COMMIT_SHA:0:8}
 
 # MVN PACKAGE
 mvn package
-JAR_ABS_PATH=`mvn -q exec:exec -Dexec.executable='echo' -Dexec.args='${project.build.directory}/${project.artifactId}-${project.version}.${project.packaging}'`
+PKG_ABS_PATH=`mvn -q exec:exec -Dexec.executable='echo' -Dexec.args='${project.build.directory}/${project.artifactId}-${project.version}.${project.packaging}'`
 
-mv $JAR_ABS_PATH $BUILD_CONTEXT/
-
+mv $PKG_ABS_PATH $BUILD_CONTEXT/
+PKG_NAME=`basename ${PKG_ABS_PATH}`
 # Docker Build
-docker build -t $IMAGE_URL $BUILD_CONTEXT/
+docker build --build-arg PKG_NAME=${PKG_NAME} -t $IMAGE_URL $BUILD_CONTEXT/
 docker push $IMAGE_URL
 
 # clean
