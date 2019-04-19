@@ -1,4 +1,9 @@
 #!/bin/bash
+# 作者: 夏禹
+# 邮箱: zgwldrc@163.com
+# 运行环境: zgwldrc/maven-and-docker
+# docker run --rm -it zgwldrc/maven-and-docker sh
+# 该脚本用于crush项目在gitlab-ci系统中的构建
 ##################### ENV ARG MUST
 # REGISTRY
 # REGISTRY_USER
@@ -9,7 +14,6 @@
 # CI_COMMIT_SHA
 ##################### ENV ARG OPTIONAL
 # IMAGE_CLEAN bool
-
 
 set -x
 function check_env(){
