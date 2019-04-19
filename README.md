@@ -1,1 +1,1 @@
-# bcc
+# Bash Common Code

@@ -1,0 +1,1 @@
+mvn -Dexec.executable='echo' -Dexec.args='${project.artifactId}' exec:exec -q
