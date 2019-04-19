@@ -1,5 +1,65 @@
+#!/bin/bash
+# 作者: 夏禹
+# 邮箱: zgwldrc@163.com
+# 运行环境: zgwldrc/maven-and-docker
+# docker run --rm -it zgwldrc/maven-and-docker sh
+# 该脚本用于crush项目在gitlab-ci系统中的构建
+##################### ENV ARG MUST
+# REGISTRY
+# REGISTRY_USER
+# REGISTRY_PASSWD
+# REGISTRY_NAMESPACE
+# IMAGE_NAME
+# DOCKERFILE_URL
+# CI_COMMIT_SHA
+##################### ENV ARG OPTIONAL
+# IMAGE_CLEAN bool
+
+set -x
+function check_env(){
+  local r
+  for i do
+    eval "r=\${${i}:-undefined}"
+    if [ "$r" == "undefined" ];then
+      echo "$i is not defined"
+      exit 1
+    fi
+  done
+}
+
+# 检查必要的环境变量
+ENV_CHECK_LIST='
+REGISTRY
+REGISTRY_USER
+REGISTRY_PASSWD
+REGISTRY_NAMESPACE
+IMAGE_NAME
+DOCKERFILE_URL
+CI_COMMIT_SHA
+'
+check_env $ENV_CHECK_LIST
+docker version
+# get docker credential
+docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASSWD" "$REGISTRY"
+# get build context 
+BUILD_CONTEXT=$(mktemp -d)
+# get Dockerfile
+curl -H "Cache-Control: no-cache" -so $BUILD_CONTEXT/Dockerfile $DOCKERFILE_URL
+# get docker image url
+IMAGE_URL=${REGISTRY}/$REGISTRY_NAMESPACE/${IMAGE_NAME}:${CI_COMMIT_SHA:0:8}
+
+
+# MVN PACKAGE
 mvn package
-curl -sO $DOCKERFILE_URL
-docker login -u $REGISTRY_USER -p $REGISTRY_PASSWD $REGISTRY
-docker build -f Dockerfile --build-arg PKG_NAME=clearing-0.0.1-SNAPSHOT.jar -t $REGISTRY/$REGISTRY_NAMESPACE/$APP_NAME:${CI_COMMIT_SHA:0:8} target
-docker push $REGISTRY/$REGISTRY_NAMESPACE/$APP_NAME:${CI_COMMIT_SHA:0:8} 
+PKG_ABS_PATH=`mvn -q exec:exec -Dexec.executable='echo' -Dexec.args='${project.build.directory}/${project.artifactId}-${project.version}.${project.packaging}'`
+
+mv $PKG_ABS_PATH $BUILD_CONTEXT/
+PKG_NAME=`basename ${PKG_ABS_PATH}`
+# Docker Build
+docker build --build-arg PKG_NAME=${PKG_NAME} -t $IMAGE_URL $BUILD_CONTEXT/
+docker push $IMAGE_URL
+
+# clean
+if [ "$IMAGE_CLEAN" == "true" ];then
+      docker image rm $IMAGE_URL
+fi
