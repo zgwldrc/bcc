@@ -44,7 +44,7 @@ docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASSWD" "$REGISTRY"
 # get build context 
 BUILD_CONTEXT=$(mktemp -d)
 # get Dockerfile
-curl -so $BUILD_CONTEXT/Dockerfile $DOCKERFILE_URL
+curl -H "Cache-Control: no-cache" -so $BUILD_CONTEXT/Dockerfile $DOCKERFILE_URL
 # get docker image url
 IMAGE_URL=${REGISTRY}/$REGISTRY_NAMESPACE/${IMAGE_NAME}:${CI_COMMIT_SHA:0:8}
 
