@@ -63,7 +63,3 @@ docker push $IMAGE_URL
 if [ "$IMAGE_CLEAN" == "true" ];then
       docker image rm $IMAGE_URL
 fi
-
-
-
-
