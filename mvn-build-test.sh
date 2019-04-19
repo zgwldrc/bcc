@@ -42,7 +42,7 @@ docker version
 # get docker credential
 docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASSWD" "$REGISTRY"
 # get build context 
-BUILD_CONTEXT=$(mktemp)
+BUILD_CONTEXT=$(mktemp -d)
 # get Dockerfile
 curl -so $BUILD_CONTEXT/Dockerfile $DOCKERFILE_URL
 # get docker image url
