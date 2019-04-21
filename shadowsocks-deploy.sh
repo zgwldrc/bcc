@@ -1,7 +1,7 @@
 #!/bin/bash
 # ss-server
-
 set -e
+curl -s https://raw.githubusercontent.com/zgwldrc/bcc/master/docker-install-ubuntu.sh | sh
 PUBLIC_ADDR=`curl ifconfig.co`
 PORT=`shuf -i 2000-65000 -n 1`
 PASSWORD=`date +%s | sha256sum | base64 | head -c 32 ; echo`
