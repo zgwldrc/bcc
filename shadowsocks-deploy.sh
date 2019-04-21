@@ -1,5 +1,6 @@
 #!/bin/bash
 # ss-server
+
 set -e
 PUBLIC_ADDR=`curl ifconfig.co`
 PORT=`shuf -i 2000-65000 -n 1`
