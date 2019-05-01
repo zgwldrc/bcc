@@ -1,9 +1,29 @@
+stages:
+  - build
+  - deploy
+variables:
+  REGISTRY: ""
+  REGISTRY_NAMESPACE: ""
+  REGISTRY_USER: ""
+  APP_INFOS_URL: ""
+  DOCKERFILE_URL: ""
+  BUILD_LIST: "release-all"
+  BUILD_SCRIPT: ""
+  DEPLOY_SCRIPT: ""
+  NAMESPACE: ""
+  ################ OPTIONAL ###############
+  # MVN_SETTINGS: "http://url/of/custom/mvn/settings.xml"
+  # IMAGE_CLEAN: "true"
+  # BUILD_EXCLUDE_LIST: "app1,app2,app3"
+  # DEPLOY_EXCLUDE_LIST: "app1,app2,app3"
+  ################ SECRET VARIABLES ###############
+  # KUBECONFIG_CONTENT
+  # REGISTRY_PASSWD or (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_DEFAULT_REGION)
+
 build:
   only:
   - trigger
   stage: build
-  tags:
-  - prod
   image: zgwldrc/maven-and-docker
   cache:
     paths:
@@ -24,8 +44,7 @@ deploy:test:
     only: 
     - trigger
     stage: deploy
-    tags:
-    - prod
+    when: manual
     variables:
       NAMESPACE: xx
     script: |
