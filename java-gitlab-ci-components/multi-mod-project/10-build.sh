@@ -101,9 +101,17 @@ DEPLOY_EXCLUDE_LIST=$(listTransform $DEPLOY_EXCLUDE_LIST)
 
 
 if [ "$BUILD_LIST" == "release-all" ] ;then
+    grep -Ev "^#|${BUILD_EXCLUDE_LIST:-NOTHINGTOEXCLUDE}" $APP_INFOS_FILE| tee build_list | grep -Ev "${DEPLOY_EXCLUDE_LIST:-NOTHINGTOEXCLUDE}" > deploy_list
+    echo -e "\033[32mThis is the build_list:\n"
+    awk '{print $1}' build_list
+    echo -e "\033[0m"
+    echo -e "\n\n\n"
+    echo -e "\033[32mThis is the deploy_list:\n"
+    awk '{print $1}' deploy_list
+    echo -e "\033[0m"
     # 构建所有
     mvn -U clean package
-    grep -Ev "^#|${BUILD_EXCLUDE_LIST:-NOTHINGTOEXCLUDE}" $APP_INFOS_FILE| tee build_list | grep -Ev "${DEPLOY_EXCLUDE_LIST:-NOTHINGTOEXCLUDE}" > deploy_list
+    
     awk '{print $1,$3"-"$4".jar",$2"/target/"}' build_list | while read app_name package_name build_context;do
         build_app $app_name $package_name $build_context
     done
@@ -111,7 +119,7 @@ else
     BUILD_LIST=$(listTransform $BUILD_LIST)
     # 根据$BUILD_LIST过滤出需要构建的列表 build_list
     echo -e "\033[32mThis is the build_list:"
-    grep -E "$BUILD_LIST" $APP_INFOS_FILE | tee build_list
+    grep -E "$BUILD_LIST" $APP_INFOS_FILE | tee build_list | awk '{print $1}'
     echo -e "\033[0m"
 
     if [ ! -s build_list ];then
@@ -120,8 +128,8 @@ else
     fi
     
     # 生成部署列表 deploy_list
-    echo -e "\033[32mThis is the deploy_list:"
-    grep -Ev "${DEPLOY_EXCLUDE_LIST:-NOTHINGTOEXCLUDE}" build_list | tee deploy_list
+    echo -e "\033[32mThis is the deploy_list:\n"
+    grep -Ev "${DEPLOY_EXCLUDE_LIST:-NOTHINGTOEXCLUDE}" build_list | tee deploy_list | awk '{print $1}'
     echo -e "\033[0m"
      
     # 为mvn命令行构造模块列表参数
