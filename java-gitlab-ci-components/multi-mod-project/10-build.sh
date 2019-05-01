@@ -6,20 +6,17 @@
 
 # -------------------- 必要的环境变量
 # REGISTRY
-# REGISTRY_USER
-# REGISTRY_PASSWD                   :如果使用AWS ECR 则通过awscli自动生成
 # REGISTRY_NAMESPACE
+# REGISTRY_USER
+# REGISTRY_PASSWD or (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_DEFAULT_REGION)
 # DOCKERFILE_URL
 # APP_INFOS_URL
 # BUILD_LIST
 
 # -------------------- 可选的环境变量
-# AWS_ACCESS_KEY_ID
-# AWS_SECRET_ACCESS_KEY
-# AWS_DEFAULT_REGION
 # MVN_SETTINGS                      : URL of settings.xml
 # IMAGE_CLEAN                       : true or false
-# BUILD_EXCLUDE_LIS
+# BUILD_EXCLUDE_LIST
 # DEPLOY_EXCLUDE_LIST
 
 set -e

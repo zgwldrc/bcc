@@ -6,13 +6,14 @@
 # 该脚本用于crush项目在gitlab-ci系统中的构建
 ##################### ENV ARG MUST
 # REGISTRY
-# REGISTRY_USER
-# REGISTRY_PASSWD
 # REGISTRY_NAMESPACE
-# IMAGE_NAME
+# REGISTRY_USER
+# REGISTRY_PASSWD or (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_DEFAULT_REGION)
+# APP_NAME
 # DOCKERFILE_URL
-# CI_COMMIT_SHA
+
 ##################### ENV ARG OPTIONAL
+# MVN_SETTINGS 
 # IMAGE_CLEAN bool
 
 set -x
@@ -26,6 +27,10 @@ function check_env(){
     fi
   done
 }
+
+if [[ ! -z "$AWS_ACCESS_KEY_ID" && ! -z "$AWS_SECRET_ACCESS_KEY" && ! -z "$AWS_DEFAULT_REGION" ]] ;then
+  REGISTRY_PASSWD=$(aws ecr get-login --no-include-email --region "$AWS_DEFAULT_REGION" | awk '{print $6}')
+fi
 
 # 检查必要的环境变量
 ENV_CHECK_LIST='
@@ -41,6 +46,14 @@ check_env $ENV_CHECK_LIST
 docker version
 # get docker credential
 docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASSWD" "$REGISTRY"
+
+if [ ! -z "$MVN_SETTINGS" ];then
+  echo "Found MVN_SETTINGS: $MVN_SETTINGS"
+  echo "Downloading..."
+  mkdir -p $HOME/.m2/
+  curl -s "$MVN_SETTINGS" -o $HOME/.m2/settings.xml && echo "Download Success! " || echo "Download Failed."
+fi
+
 # get build context 
 BUILD_CONTEXT=$(mktemp -d)
 # get Dockerfile
