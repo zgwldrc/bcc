@@ -38,12 +38,14 @@ function check_env(){
   done
 }
 
-if [[ ! -z "$AWS_ACCESS_KEY_ID" && ! -z "$AWS_SECRET_ACCESS_KEY" && ! -z "$AWS_DEFAULT_REGION" ]] ;then
+check_env REGISTRY
+if [[ "$REGISTRY" =~ .*amazonaws.com$ ]];then
+  check_env AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_DEFAULT_REGION
   REGISTRY_PASSWD=$(aws ecr get-login --no-include-email --region "$AWS_DEFAULT_REGION" | awk '{print $6}')
 fi
 
 # 检查必要的环境变量
-ENV_CHECK_LIST='
+ENV_CHECK_LIST=(
 REGISTRY
 REGISTRY_USER
 REGISTRY_PASSWD
@@ -51,8 +53,9 @@ REGISTRY_NAMESPACE
 DOCKERFILE_URL
 APP_INFOS_URL
 BUILD_LIST
-'
-check_env $ENV_CHECK_LIST
+)
+
+check_env ${ENV_CHECK_LIST[@]}
 
 docker version
 docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASSWD" "$REGISTRY"
