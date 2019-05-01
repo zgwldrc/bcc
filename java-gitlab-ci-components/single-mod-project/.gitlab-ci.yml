@@ -1,0 +1,28 @@
+build:
+  only:
+  - trigger
+  stage: build
+  tags:
+  - prod
+  image: zgwldrc/maven-and-docker
+  cache:
+    paths:
+      - ".m2/repository"
+  variables:
+    MAVEN_OPTS: "-Dmaven.test.skip=true -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
+  script:
+    - curl -s -o- $BUILD_SCRIPT | bash
+
+deploy:test:
+    environment:
+      name: test
+    image: zgwldrc/kubectl:v1.11.7
+    only: 
+    - trigger
+    stage: deploy
+    tags:
+    - prod
+    variables:
+      NAMESPACE: xx
+    script: |
+        curl -s -o- $DEPLOY_SCRIPT | sh
