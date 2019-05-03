@@ -2,6 +2,7 @@ stages:
   - build
   - deploy
 variables:
+  APP_NAME: ""
   REGISTRY: ""
   REGISTRY_NAMESPACE: ""
   REGISTRY_USER: ""
