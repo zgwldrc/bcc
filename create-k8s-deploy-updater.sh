@@ -3,7 +3,7 @@ NAMESPACE=$(kubectl get sa default -ojsonpath='{.metadata.namespace}')
 function create_cluster_deploy_patcher_sa() {
     local sa_name=$SA_NAME
     kubectl -n kube-system create sa $sa_name
-    kubectl create clusterrole $sa_name --resource=deploy --verb=patch --verb=get
+    kubectl create clusterrole $sa_name --resource=deploy --verb=patch
     kubectl create clusterrolebinding $sa_name --clusterrole=$sa_name --serviceaccount=kube-system:$sa_name
 }
 function get_sa_token(){
@@ -35,8 +35,5 @@ function clean_deploy_patcher_sa(){
     kubectl -n kube-system delete sa $sa_name
 }
 create_cluster_deploy_patcher_sa
-gen_sa_kubeconfig > kubeconfig
-
-# kubectl get deploy 
-# kubectl --kubeconfig=kubeconfig get deploy staff-web
+gen_sa_kubeconfig
 
