@@ -1,3 +1,28 @@
+stages:
+  - build
+  - deploy
+variables:
+  REGISTRY: ""
+  REGISTRY_NAMESPACE: ""
+  REGISTRY_USER: ""
+  APP_INFOS_URL: ""
+  DOCKERFILE_URL: ""
+  BUILD_LIST: "release-all"
+  BUILD_SCRIPT: ""
+  DEPLOY_SCRIPT: ""
+  NAMESPACE: ""
+  BUILD_EXCLUDE_LIST: ""
+  DEPLOY_EXCLUDE_LIST: ""
+  IMAGE_CLEAN: "true"
+  ################ OPTIONAL ###############
+  # MVN_SETTINGS: "http://url/of/custom/mvn/settings.xml"
+  # IMAGE_CLEAN: "true"
+  # BUILD_EXCLUDE_LIST: "app1,app2,app3"
+  # DEPLOY_EXCLUDE_LIST: "app1,app2,app3"
+  ################ SECRET VARIABLES ###############
+  # KUBECONFIG_CONTENT
+  # REGISTRY_PASSWD or (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_DEFAULT_REGION)
+
 build:
   only:
   - trigger
@@ -18,15 +43,15 @@ build:
     - curl -s -o- $BUILD_SCRIPT | bash
 
 deploy:test:
-    environment:
-      name: test
-    image: zgwldrc/kubectl:v1.11.7
-    only: 
-    - trigger
-    stage: deploy
-    tags:
-    - prod
-    variables:
-      NAMESPACE: xx
-    script: |
-        curl -s -o- $DEPLOY_SCRIPT | sh
+  stage: deploy
+  only: 
+  - trigger
+  when: manual
+  environment:
+    name: prod
+  image: zgwldrc/kubectl:v1.11.7
+  variables:
+    GIT_STRATEGY: none
+    NAMESPACE: xx
+  script: |
+      curl -s -o- $DEPLOY_SCRIPT | sh

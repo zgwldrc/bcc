@@ -1,0 +1,30 @@
+stages:
+  - build
+  - deploy
+variables:
+  REGISTRY: ""
+  REGISTRY_NAMESPACE: ""
+  REGISTRY_USER: ""
+  DOCKERFILE_URL: ""
+  BUILD_SCRIPT: ""
+  DEPLOY_SCRIPT: ""
+  NAMESPACE: ""
+  IMAGE_CLEAN: "true"
+  ################ OPTIONAL ###############
+  # IMAGE_CLEAN: "true"
+  ################ SECRET VARIABLES ###############
+  # KUBECONFIG_CONTENT
+  # REGISTRY_PASSWD or (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_DEFAULT_REGION)
+
+build:
+  stage: build
+  only:
+  - master
+  image: zgwldrc/npm-and-docker:awscli
+  cache:
+    paths:
+      - node_modules/
+  script:
+  - |
+    curl -s $BUILD_SCRIPT |bash
+
