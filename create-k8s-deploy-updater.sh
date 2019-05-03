@@ -34,6 +34,8 @@ function clean_deploy_patcher_sa(){
     kubectl delete clusterrole $sa_name
     kubectl -n kube-system delete sa $sa_name
 }
+clean_deploy_patcher_sa
 create_cluster_deploy_patcher_sa
 gen_sa_kubeconfig
+
 
