@@ -27,8 +27,6 @@ build:
   only:
   - trigger
   stage: build
-  tags:
-  - prod
   image: zgwldrc/maven-and-docker
   cache:
     paths:
@@ -42,7 +40,7 @@ build:
   script:
     - curl -s -o- $BUILD_SCRIPT | bash
 
-deploy:test:
+deploy:
   stage: deploy
   only: 
   - trigger
