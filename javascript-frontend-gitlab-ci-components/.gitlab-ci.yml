@@ -29,3 +29,14 @@ build:
   - |
     curl -s $BUILD_SCRIPT |bash
 
+deploy:
+  environment:
+    name: prod
+  image: zgwldrc/kubectl:v1.11.7
+  stage: deploy
+  when: manual
+  variables:
+    NAMESPACE: xx
+  script: |
+      curl -s -o- $DEPLOY_SCRIPT | sh
+
