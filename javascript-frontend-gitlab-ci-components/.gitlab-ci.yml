@@ -5,11 +5,10 @@ variables:
   APP_NAME: ""
   REGISTRY: ""
   REGISTRY_NAMESPACE: ""
-  REGISTRY_USER: ""
-  DOCKERFILE_URL: ""
-  BUILD_SCRIPT: ""
-  DEPLOY_SCRIPT: ""
-  NAMESPACE: ""
+  REGISTRY_USER: "AWS"
+  DOCKERFILE_URL: "https://raw.githubusercontent.com/zgwldrc/bcc/master/javascript-frontend-gitlab-ci-components/Dockerfile"
+  BUILD_SCRIPT: "https://raw.githubusercontent.com/zgwldrc/bcc/master/javascript-frontend-gitlab-ci-components/10-build.sh"
+  DEPLOY_SCRIPT: "https://raw.githubusercontent.com/zgwldrc/bcc/master/javascript-frontend-gitlab-ci-components/20-deploy.sh"
   IMAGE_CLEAN: "true"
   ################ OPTIONAL ###############
   # IMAGE_CLEAN: "true"
@@ -36,7 +35,7 @@ deploy:
   stage: deploy
   when: manual
   variables:
-    NAMESPACE: xx
+    CONTEXT: xx
   script: |
       curl -s -o- $DEPLOY_SCRIPT | sh
 
