@@ -15,7 +15,7 @@
 
 # 必要的环境变量
 ENV_CHECK_LIST='
-NAMESPACE
+CONTEXT
 KUBECONFIG_CONTENT
 REGISTRY
 REGISTRY_NAMESPACE
@@ -37,7 +37,7 @@ function check_env(){
 function _init_env(){
     mkdir -p $HOME/.kube/
     echo -e "$KUBECONFIG_CONTENT" > $HOME/.kube/config
-    kubectl config set-context `kubectl config current-context` --namespace=$NAMESPACE
+    kubectl config use-context $CONTEXT
 }
 
 check_env $ENV_CHECK_LIST

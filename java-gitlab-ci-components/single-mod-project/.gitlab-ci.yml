@@ -4,12 +4,11 @@ stages:
 variables:
   REGISTRY: ""
   REGISTRY_NAMESPACE: ""
-  REGISTRY_USER: ""
+  REGISTRY_USER: "AWS"
   APP_NAME: ""
-  BUILD_SCRIPT: ""
-  DOCKERFILE_URL: ""
-  DEPLOY_SCRIPT: ""
-  NAMESPACE: ""
+  DOCKERFILE_URL: "https://raw.githubusercontent.com/zgwldrc/bcc/master/java-gitlab-ci-components/jar-dockerfile/Dockerfile"
+  BUILD_SCRIPT: "https://raw.githubusercontent.com/zgwldrc/bcc/master/java-gitlab-ci-components/single-mod-project/10-build.sh"
+  DEPLOY_SCRIPT: "https://raw.githubusercontent.com/zgwldrc/bcc/master/java-gitlab-ci-components/single-mod-project/20-deploy.sh"
   ################ OPTIONAL ###############
   # MVN_SETTINGS: "http://url/of/custom/mvn/settings.xml"
   # IMAGE_CLEAN: "true"
@@ -36,6 +35,6 @@ deploy:test:
   stage: deploy
   when: manual
   variables:
-    NAMESPACE: xx      
+    CONTEXT: xx      
   script: |
       curl -s -o- $DEPLOY_SCRIPT | sh

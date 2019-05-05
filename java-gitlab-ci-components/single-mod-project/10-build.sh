@@ -28,7 +28,9 @@ function check_env(){
   done
 }
 
-if [[ ! -z "$AWS_ACCESS_KEY_ID" && ! -z "$AWS_SECRET_ACCESS_KEY" && ! -z "$AWS_DEFAULT_REGION" ]] ;then
+check_env REGISTRY
+if [[ "$REGISTRY" =~ .*amazonaws.com$ ]];then
+  check_env AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_DEFAULT_REGION
   REGISTRY_PASSWD=$(aws ecr get-login --no-include-email --region "$AWS_DEFAULT_REGION" | awk '{print $6}')
 fi
 
