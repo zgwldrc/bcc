@@ -1,6 +1,7 @@
 stages:
   - build
-  - deploy
+  - deploy:test
+  - deploy:prod
 variables:
   REGISTRY: ""
   REGISTRY_NAMESPACE: ""
@@ -40,8 +41,22 @@ build:
   script:
     - curl -s -o- $BUILD_SCRIPT | bash
 
-deploy:
-  stage: deploy
+deploy:test:
+  stage: deploy:test
+  only: 
+  - trigger
+  when: manual
+  environment:
+    name: test
+  image: zgwldrc/kubectl:v1.11.7
+  variables:
+    GIT_STRATEGY: none
+    CONTEXT: xx
+  script: |
+      curl -s -o- $DEPLOY_SCRIPT | sh
+
+deploy:prod:
+  stage: deploy:prod
   only: 
   - trigger
   when: manual
@@ -50,6 +65,6 @@ deploy:
   image: zgwldrc/kubectl:v1.11.7
   variables:
     GIT_STRATEGY: none
-    NAMESPACE: xx
+    CONTEXT: xx
   script: |
       curl -s -o- $DEPLOY_SCRIPT | sh
