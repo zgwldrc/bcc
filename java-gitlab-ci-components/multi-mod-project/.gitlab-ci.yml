@@ -22,7 +22,12 @@ variables:
   ################ SECRET VARIABLES ###############
   # KUBECONFIG_CONTENT
   # REGISTRY_PASSWD or (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_DEFAULT_REGION)
-
+before_script:
+- |
+  echo ${BASH_VERSION}
+  echo "CI_COMMIT_SHA: ${CI_COMMIT_SHA}"
+  echo "CI_COMMIT_TAG: ${CI_COMMIT_TAG}"
+  echo "CI_COMMIT_REF_NAME: ${CI_COMMIT_REF_NAME}"
 build:
   only:
   - trigger
