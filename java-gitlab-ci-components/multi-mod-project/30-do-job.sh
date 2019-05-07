@@ -36,14 +36,16 @@ function _init_env(){
 }
 
 set -e
-check_env $ENV_CHECK_LIST
-_init_env
+if grep -q "^${APP_NAME}" build_list;then
+  check_env $ENV_CHECK_LIST
+  _init_env
 
-if kubectl get configmaps ${APP_NAME}-env &> /dev/null;then
+  if kubectl get configmaps ${APP_NAME}-env &> /dev/null;then
     kubectl run --rm $APP_NAME --generator=run-pod/v1 --restart=Never --attach \
         --image=$REGISTRY/$REGISTRY_NAMESPACE/$APP_NAME:${CI_COMMIT_SHA:0:8} \
         --overrides="{\"apiVersion\":\"v1\",\"spec\":{\"containers\":[{\"envFrom\":[{\"configMapRef\":{\"name\":\"${APP_NAME}-env\"}}],\"image\":\"$REGISTRY/$REGISTRY_NAMESPACE/$APP_NAME:${CI_COMMIT_SHA:0:8}\",\"name\":\"$APP_NAME\",\"restartPolicy\":\"Never\"}]}}"
-else
+  else
     echo "configmap ${APP_NAME}-env not found."
     exit 1
+  fi
 fi
