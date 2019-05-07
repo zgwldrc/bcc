@@ -48,7 +48,8 @@ if [ ! -e deploy_list ];then
     echo deploy_list not found 
     exit 1
 else
-    cat deploy_list
+    echo "This is the deploy list:"
+    awk '{print $1}' deploy_list
 fi
 
 awk '{print $1,$1}' deploy_list | while read app app_instance;do
