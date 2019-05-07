@@ -1,7 +1,8 @@
 stages:
   - build
-  - deploy:test
-  - deploy:prod
+  - flyway
+  - deploy
+
 variables:
   REGISTRY: ""
   REGISTRY_NAMESPACE: ""
@@ -11,6 +12,7 @@ variables:
   BUILD_LIST: "release-all"
   BUILD_SCRIPT: "https://raw.githubusercontent.com/zgwldrc/bcc/master/java-gitlab-ci-components/multi-mod-project/10-build.sh"
   DEPLOY_SCRIPT: "https://raw.githubusercontent.com/zgwldrc/bcc/master/java-gitlab-ci-components/multi-mod-project/21-deploy.sh"
+  DO_JOB_SCRIPT: "https://raw.githubusercontent.com/zgwldrc/bcc/master/java-gitlab-ci-components/multi-mod-project/30-do-job.sh"
   BUILD_EXCLUDE_LIST: ""
   DEPLOY_EXCLUDE_LIST: ""
   IMAGE_CLEAN: "true"
@@ -28,6 +30,7 @@ before_script:
   echo "CI_COMMIT_SHA: ${CI_COMMIT_SHA}"
   echo "CI_COMMIT_TAG: ${CI_COMMIT_TAG}"
   echo "CI_COMMIT_REF_NAME: ${CI_COMMIT_REF_NAME}"
+
 build:
   only:
   - trigger
@@ -45,30 +48,29 @@ build:
   script:
     - curl -s -o- $BUILD_SCRIPT | bash
 
-deploy:test:
-  stage: deploy:test
-  only: 
+flyway:
+  stage: flyway
+  only:
   - trigger
   when: manual
-  environment:
-    name: test
   image: zgwldrc/kubectl:v1.11.7
   variables:
+    CONTEXT: <context>
     GIT_STRATEGY: none
-    CONTEXT: xx
-  script: |
-      curl -s -o- $DEPLOY_SCRIPT | sh
+    APP_NAME: <job-name>
+  script:
+  - curl -s -o- $DO_JOB_SCRIPT | sh
 
-deploy:prod:
-  stage: deploy:prod
+deploy:
+  stage: deploy
   only: 
   - trigger
   when: manual
   environment:
-    name: prod
+    name: <context>
   image: zgwldrc/kubectl:v1.11.7
   variables:
     GIT_STRATEGY: none
-    CONTEXT: xx
+    CONTEXT: <context>
   script: |
       curl -s -o- $DEPLOY_SCRIPT | sh
