@@ -23,3 +23,4 @@ if kubectl get configmaps ${APP_NAME}-env &> /dev/null;then
 else
     echo "configmap ${APP_NAME}-env not found."
     exit 1
+fi
