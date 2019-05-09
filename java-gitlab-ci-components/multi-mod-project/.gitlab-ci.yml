@@ -38,7 +38,7 @@ build:
   image: zgwldrc/maven-and-docker
   cache:
     paths:
-      - ".m2/repository"
+      - ".m2/ "
   artifacts:
     paths:
       - deploy_list
