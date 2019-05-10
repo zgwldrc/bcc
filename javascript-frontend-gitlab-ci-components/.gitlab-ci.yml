@@ -8,10 +8,7 @@ variables:
   REGISTRY_USER: "AWS"
   DOCKERFILE_URL: "https://raw.githubusercontent.com/zgwldrc/bcc/master/javascript-frontend-gitlab-ci-components/Dockerfile"
   BUILD_SCRIPT: "https://raw.githubusercontent.com/zgwldrc/bcc/master/javascript-frontend-gitlab-ci-components/10-build.sh"
-  DEPLOY_SCRIPT: "https://raw.githubusercontent.com/zgwldrc/bcc/master/javascript-frontend-gitlab-ci-components/20-deploy.sh"
-  IMAGE_CLEAN: "true"
-  ################ OPTIONAL ###############
-  # IMAGE_CLEAN: "true"
+  DEPLOY_SCRIPT: "https://raw.githubusercontent.com/zgwldrc/bcc/master/javascript-frontend-gitlab-ci-components/21-deploy.sh"
   ################ SECRET VARIABLES ###############
   # KUBECONFIG_CONTENT
   # REGISTRY_PASSWD or (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_DEFAULT_REGION)

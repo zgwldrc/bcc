@@ -11,7 +11,6 @@ function check_env(){
   done
 }
 
-
 check_env REGISTRY
 if [[ "$REGISTRY" =~ .*amazonaws.com$ ]];then
   check_env AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_DEFAULT_REGION
@@ -30,18 +29,21 @@ APP_NAME
 check_env $ENV_CHECK_LIST
 docker login -u $REGISTRY_USER -p $REGISTRY_PASSWD $REGISTRY
 curl -s "$DOCKERFILE_URL" -o Dockerfile
-function build() {
-    local build_context=$1
-    local image_url=$REGISTRY/$REGISTRY_NAMESPACE/${APP_NAME}:${CI_COMMIT_SHA:0:8}
-    docker build -f Dockerfile -t ${image_url} ${build_context}
-    docker push ${image_url}
-    if [ "$IMAGE_CLEAN" == "true" ];then
-        docker image rm ${image_url}
-    fi
-}
 
+function build() {
+    local env=$1
+    local bc=$2
+    local image_url=$REGISTRY/$REGISTRY_NAMESPACE/${APP_NAME}-${env}:${CI_COMMIT_SHA:0:8}
+    docker build -f Dockerfile -t ${image_url} ${bc}
+    docker push ${image_url}
+    docker image rm ${image_url}
+}
 node -v
 npm -v
 npm install
-npm run build
-build dist
+npm run d1
+npm run t1
+npm run t2
+build d1 d1
+build t1 t1
+build t2 t2
