@@ -2,6 +2,7 @@
 crush-quotation-data-historical                         quotation/quotation-data-historical                     quotation-data-historical               2.0.0-SNAPSHOT
 crush-quotation-data-historical-saver-mysql             quotation/quotation-data-historical-saver-mysql         quotation-data-historical-saver-mysql   2.0.0-SNAPSHOT
 crush-quotation-data-realtime                           quotation/quotation-data-realtime                       quotation-data-realtime                 2.0.0-SNAPSHOT
+crush-quotation-data-migration                          quotation/quotation-data-migration                      quotation-data-migration                2.0.0-SNAPSHOT
 crush-quotation-jsonrpc-deal                            quotation/quotation-jsonrpc-deal                        quotation-jsonrpc-deal                  2.0.0-SNAPSHOT
 crush-quotation-jsonrpc-depth                           quotation/quotation-jsonrpc-depth                       quotation-jsonrpc-depth                 2.0.0-SNAPSHOT
 crush-quotation-market                                  quotation/quotation-market                              quotation-market                        2.0.0-SNAPSHOT
