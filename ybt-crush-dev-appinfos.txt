@@ -6,7 +6,7 @@ crush-sms-sender                                          workers/sms-sender    
 crush-security-job                                        jobs/security                                           security-job                            0.0.1-SNAPSHOT
 crush-quotation-job                                       jobs/quotation-job                                      quotation-job                           0.0.1-SNAPSHOT
 crush-statistics-job                                      jobs/statistics-job                                     statistics-job                          0.0.1-SNAPSHOT
-crush-asset-job                                           jobs/asset-job                                     asset-job                          0.0.1-SNAPSHOT
+crush-asset-job                                           jobs/asset-job                                          asset-job                               0.0.1-SNAPSHOT
 crush-migration-job                                       jobs/migration-job                                      migration-job                           0.0.1-SNAPSHOT
-crush-relation-job                                        jobs/relation-job                                       relation-job                            0.0.1-SNAPSHOT
+crush-relation-update-job                                 jobs/relation-update-job                                relation-update-job                     0.0.1-SNAPSHOT
 crush-flyway                                              flyway                                                  flyway                                  2.0.0-SNAPSHOT
