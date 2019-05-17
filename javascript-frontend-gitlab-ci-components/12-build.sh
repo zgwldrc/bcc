@@ -1,5 +1,5 @@
 #!/bin/bash
-# 前端项目dev分支的发布脚本
+# 前端项目dev分支的发布脚本2
 set -e
 function check_env(){
   local r
@@ -42,9 +42,5 @@ function build() {
 node -v
 npm -v
 npm install
-npm run d1
-npm run t1
-npm run t2
-build d1 d1
-build t1 t1
-build t2 t2
+npm run build
+build d1 dist

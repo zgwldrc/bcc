@@ -1,4 +1,5 @@
 #!/bin/bash
+# 前端项目master分支的发布脚本
 set -e
 function check_env(){
   local r
