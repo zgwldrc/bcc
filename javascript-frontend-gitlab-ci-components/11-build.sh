@@ -41,5 +41,5 @@ function build() {
 node -v
 npm -v
 npm install
-npm run build
-build d1 dist
+npm run r1
+build r1 r1
