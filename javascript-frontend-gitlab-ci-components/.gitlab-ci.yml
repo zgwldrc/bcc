@@ -32,6 +32,7 @@ deploy:
   stage: deploy
   when: manual
   variables:
+    GIT_STRATEGY: none
     CONTEXT: xx
   script: |
       curl -s -o- $DEPLOY_SCRIPT | sh
