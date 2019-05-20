@@ -43,4 +43,4 @@ node -v
 npm -v
 npm install
 npm run build
-build d1 build
+build test build
