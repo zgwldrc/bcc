@@ -3,6 +3,7 @@ crush-main                                                webapps/main          
 crush-staff                                               webapps/staff                                           staff-web                               0.0.1-SNAPSHOT
 crush-wallet                                              webapps/wallet		                                  wallet-web	                          0.0.1-SNAPSHOT
 crush-sms-sender                                          workers/sms-sender                                      sms-sender                              0.0.1-SNAPSHOT
+crush-mail-sender                                          workers/mail-sender                                      mail-sender                              0.0.1-SNAPSHOT
 crush-security-job                                        jobs/security                                           security-job                            0.0.1-SNAPSHOT
 crush-quotation-job                                       jobs/quotation-job                                      quotation-job                           0.0.1-SNAPSHOT
 crush-statistics-job                                      jobs/statistics-job                                     statistics-job                          0.0.1-SNAPSHOT
