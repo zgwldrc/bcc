@@ -20,6 +20,7 @@ crush-clearing-handler                                  apps/clearing-handler   
 crush-stopprice-handler                                 apps/stopPrice-handler                                  stopPrice-handler                       2.0.0-SNAPSHOT
 crush-dashboard-dataagent                               apps/dashboard-dataagent                                dashboard-dataagent                     2.0.0-SNAPSHOT
 crush-api-rpc                                           apps/api-rpc                                            api-rpc                                 2.0.0-SNAPSHOT
+crush-asset-loader                                      apps/asset-loader                                       asset-loader                            2.0.0-SNAPSHOT
 crush-market-job                                        jobs/market                                             market-job                              2.0.0-SNAPSHOT
 crush-entrust-job                                       jobs/entrust                                            entrust-job                             2.0.0-SNAPSHOT 
 crush-notify-job                                        jobs/notify-job                                         notify-job                              2.0.0-SNAPSHOT
