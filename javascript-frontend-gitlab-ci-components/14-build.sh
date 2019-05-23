@@ -29,7 +29,7 @@ APP_NAME
 '
 check_env $ENV_CHECK_LIST
 docker login -u $REGISTRY_USER -p $REGISTRY_PASSWD $REGISTRY
-curl -s "$DOCKERFILE_URL" -o Dockerfile
+
 
 function build() {
     local env=$1
@@ -43,6 +43,8 @@ node -v
 npm -v
 npm install
 npm install gulp
+cd AppShare
+curl -s "$DOCKERFILE_URL" -o Dockerfile
 gulp build --env production
 ls -thl
 build prod dist
