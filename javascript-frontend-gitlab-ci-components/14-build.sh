@@ -39,11 +39,12 @@ function build() {
     docker push ${image_url}
     docker image rm ${image_url}
 }
+cd AppShare
 node -v
 npm -v
+
 npm install
 npm install gulp
-cd AppShare
 curl -s "$DOCKERFILE_URL" -o Dockerfile
 gulp build --env production
 ls -thl
