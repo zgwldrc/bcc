@@ -42,6 +42,7 @@ function build() {
 node -v
 npm -v
 npm install
-eval "gulp build --env production"
+npm install gulp
+gulp build --env production
 ls -thl
 build prod dist
