@@ -43,3 +43,5 @@ node -v
 npm -v
 npm install
 eval "gulp build --env production"
+ls -thl
+build prod dist
