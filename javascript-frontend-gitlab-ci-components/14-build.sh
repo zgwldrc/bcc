@@ -47,5 +47,4 @@ npm install
 npm install gulp
 curl -s "$DOCKERFILE_URL" -o Dockerfile
 gulp build --env production
-ls -thl
 build prod dist
