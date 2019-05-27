@@ -1,5 +1,5 @@
 #!/bin/bash
-# 前端项目dev分支的发布脚本3
+# YBT前端 h5-web项目master分支的发布脚本
 set -e
 function check_env(){
   local r
@@ -32,10 +32,10 @@ docker login -u $REGISTRY_USER -p $REGISTRY_PASSWD $REGISTRY
 
 
 function build() {
-    local env=$1
-    local bc=$2
-    local image_url=$REGISTRY/$REGISTRY_NAMESPACE/${APP_NAME}-${env}:${CI_COMMIT_SHA:0:8}
-    docker build -f Dockerfile -t ${image_url} ${bc}
+    #local env=$1
+    local build_context=$1
+    local image_url=$REGISTRY/$REGISTRY_NAMESPACE/${APP_NAME}:${CI_COMMIT_SHA:0:8}
+    docker build -f Dockerfile -t ${image_url} ${build_context}
     docker push ${image_url}
     docker image rm ${image_url}
 }
@@ -47,4 +47,4 @@ npm install
 npm install gulp
 curl -s "$DOCKERFILE_URL" -o Dockerfile
 gulp build --env production
-build prod dist
+build dist
