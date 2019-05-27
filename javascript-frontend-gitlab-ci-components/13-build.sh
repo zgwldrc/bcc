@@ -1,5 +1,5 @@
 #!/bin/bash
-# 前端项目dev分支的发布脚本3
+# YBT前端staff-web项目master分支的发布脚本
 set -e
 function check_env(){
   local r
@@ -32,10 +32,9 @@ docker login -u $REGISTRY_USER -p $REGISTRY_PASSWD $REGISTRY
 curl -s "$DOCKERFILE_URL" -o Dockerfile
 
 function build() {
-    local env=$1
-    local bc=$2
-    local image_url=$REGISTRY/$REGISTRY_NAMESPACE/${APP_NAME}-${env}:${CI_COMMIT_SHA:0:8}
-    docker build -f Dockerfile -t ${image_url} ${bc}
+    local build_context=$1
+    local image_url=$REGISTRY/$REGISTRY_NAMESPACE/${APP_NAME}:${CI_COMMIT_SHA:0:8}
+    docker build -f Dockerfile -t ${image_url} ${build_context}
     docker push ${image_url}
     docker image rm ${image_url}
 }
@@ -43,4 +42,5 @@ node -v
 npm -v
 npm install
 npm run build
-build test build
+# output dir named build, use build as build_context
+build build
