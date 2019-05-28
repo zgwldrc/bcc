@@ -29,6 +29,7 @@ crush-otc-job                                           jobs/otc-job            
 crush-security-job                                      jobs/security                                           security-job                            2.0.0-SNAPSHOT
 crush-wanshare-lock-job                                 jobs/wanshare-lock-job                                  wanshare-lock-job                       2.0.0-SNAPSHOT
 crush-backup-job                                        jobs/backup-job                                         backup-job                              2.0.0-SNAPSHOT
+crush-faceid-job                                        jobs/faceid-job                                         faceid-job                              2.0.0-SNAPSHOT
 crush-sms-sender                                        workers/sms-sender                                      sms-sender                              2.0.0-SNAPSHOT
 crush-mail-sender                                       workers/mail-sender                                     mail-sender                             2.0.0-SNAPSHOT
 crush-flyway                                            flyway                                                  flyway                                  2.0.0-SNAPSHOT
