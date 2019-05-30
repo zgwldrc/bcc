@@ -31,11 +31,13 @@ function _init_env(){
 check_env $ENV_CHECK_LIST
 _init_env
 
-if kubectl get configmaps ${APP_NAME}-env &> /dev/null;then
-    kubectl run --rm $APP_NAME --generator=run-pod/v1 --restart=Never --attach \
-        --image=$REGISTRY/$REGISTRY_NAMESPACE/$APP_NAME:${CI_COMMIT_SHA:0:8} \
-        --overrides="{\"apiVersion\":\"v1\",\"spec\":{\"containers\":[{\"envFrom\":[{\"configMapRef\":{\"name\":\"${APP_NAME}-env\"}}],\"image\":\"$REGISTRY/$REGISTRY_NAMESPACE/$APP_NAME:${CI_COMMIT_SHA:0:8}\",\"name\":\"$APP_NAME\",\"restartPolicy\":\"Never\"}]}}"
-else
-    echo "configmap ${APP_NAME}-env not found."
-    exit 1
-fi
+for app_name in $APP_NAME;do
+  if kubectl get configmaps ${app_name}-env &> /dev/null;then
+      kubectl run --rm $app_name --generator=run-pod/v1 --restart=Never --attach \
+          --image=$REGISTRY/$REGISTRY_NAMESPACE/$app_name:${CI_COMMIT_SHA:0:8} \
+          --overrides="{\"apiVersion\":\"v1\",\"spec\":{\"containers\":[{\"envFrom\":[{\"configMapRef\":{\"name\":\"${app_name}-env\"}}],\"image\":\"$REGISTRY/$REGISTRY_NAMESPACE/$app_name:${CI_COMMIT_SHA:0:8}\",\"name\":\"$app_name\",\"restartPolicy\":\"Never\"}]}}"
+  else
+      echo "configmap ${app_name}-env not found."
+      exit 1
+  fi
+done
