@@ -6,6 +6,7 @@ crush-quotation-data-migration                          quotation/quotation-data
 crush-quotation-jsonrpc-deal                            quotation/quotation-jsonrpc-deal                        quotation-jsonrpc-deal                  2.0.0-SNAPSHOT
 crush-quotation-jsonrpc-depth                           quotation/quotation-jsonrpc-depth                       quotation-jsonrpc-depth                 2.0.0-SNAPSHOT
 crush-quotation-market                                  quotation/quotation-market                              quotation-market                        2.0.0-SNAPSHOT
+crush-quotation-rest-controller                         quotation/quotation-rest-controller                     quotation-rest-controller               2.0.0-SNAPSHOT
 crush-quotation-ws-server                               quotation/quotation-ws-server                           quotation-ws-server                     2.0.0-SNAPSHOT
 crush-quotation-flyway                                  quotation/quotation-flyway                              quotation-flyway                        2.0.0-SNAPSHOT
 crush-main                                              webapps/main                                            main-web                                2.0.0-SNAPSHOT      
