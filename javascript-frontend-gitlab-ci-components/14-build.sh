@@ -26,25 +26,22 @@ REGISTRY_PASSWD
 REGISTRY_NAMESPACE
 DOCKERFILE_URL
 APP_NAME
+BUILD_COMMAND
 '
 check_env $ENV_CHECK_LIST
 docker login -u $REGISTRY_USER -p $REGISTRY_PASSWD $REGISTRY
-
+curl -s "$DOCKERFILE_URL" -o Dockerfile
 
 function build() {
-    #local env=$1
-    local build_context=$1
-    local image_url=$REGISTRY/$REGISTRY_NAMESPACE/${APP_NAME}:${CI_COMMIT_SHA:0:8}
+    local env=$1
+    local build_context=$2
+    local image_url=$REGISTRY/$REGISTRY_NAMESPACE/${APP_NAME}-${env}:${CI_COMMIT_SHA:0:8}
     docker build -f Dockerfile -t ${image_url} ${build_context}
     docker push ${image_url}
     docker image rm ${image_url}
 }
-cd AppShare
+
 node -v
 npm -v
-
 npm install
-npm install gulp
-curl -s "$DOCKERFILE_URL" -o Dockerfile
-gulp build --env production
-build dist
+eval "$BUILD_COMMAND"
