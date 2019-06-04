@@ -9,6 +9,7 @@ crush-quotation-market                                  quotation/quotation-mark
 crush-quotation-rest-controller                         quotation/quotation-rest-controller                     quotation-rest-controller               2.0.0-SNAPSHOT
 crush-quotation-ws-server                               quotation/quotation-ws-server                           quotation-ws-server                     2.0.0-SNAPSHOT
 crush-quotation-flyway                                  quotation/quotation-flyway                              quotation-flyway                        2.0.0-SNAPSHOT
+crush-quotation-feixiaohao                              quotation/quotation-feixiaohao                          quotation-feixiaohao                    2.0.0-SNAPSHOT
 crush-main                                              webapps/main                                            main-web                                2.0.0-SNAPSHOT      
 crush-staff                                             webapps/staff                                           staff-web                               2.0.0-SNAPSHOT      
 crush-sponsor                                           webapps/sponsor                                         sponsor-web                             2.0.0-SNAPSHOT     
