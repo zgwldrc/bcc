@@ -58,6 +58,7 @@ BUILD_LIST
 check_env ${ENV_CHECK_LIST[@]}
 
 docker version
+echo "$REGISTRY_USER" "$REGISTRY_PASSWD" "$REGISTRY"
 docker login -u "$REGISTRY_USER" -p "$REGISTRY_PASSWD" "$REGISTRY"
 
 function build_app(){
