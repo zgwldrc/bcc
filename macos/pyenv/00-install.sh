@@ -1,6 +1,6 @@
 #!/bin/bash
-brew install pyenv pyenv-virtualenv
-cat >> ~/.bash_profile <<-EOF
-eval '$(pyenv init -)'
-eval '$(pyenv virtualenv-init -)'
-EOF
+brew install pyenv 
+echo eval '$(pyenv init -)' >> ~/.bash_profile
+#brew install pyenv-virtualenv
+#echo eval '$(pyenv virtualenv-init -)' >> ~/.bash_profile
+
