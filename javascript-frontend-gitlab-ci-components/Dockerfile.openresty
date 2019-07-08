@@ -1,0 +1,2 @@
+FROM openresty/openresty:1.15.8.1-2-bionic
+ADD ./ /usr/local/openresty/nginx/html/
