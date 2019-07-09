@@ -52,8 +52,8 @@ function _init_env(){
 check_env $ENV_CHECK_LIST
 _init_env
 
-helm upgrade $RELEASE_NAME $APP_NAME --reuse-values \
-  --repo $CHART_REPO --username $CHART_USER --password $CHART_PASSWD \
+helm repo add --username $CHART_USER --password $CHART_PASSWD mychart $CHART_REPO
+helm upgrade $RELEASE_NAME mychart/$APP_NAME --reuse-values \
   --set image.repository=$REGISTRY/$REGISTRY_NAMESPACE/$APP_NAME-${CONTEXT} \
   --set image.tag=${CI_COMMIT_SHA:0:8} --wait
 
