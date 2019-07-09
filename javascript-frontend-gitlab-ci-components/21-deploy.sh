@@ -57,6 +57,6 @@ helm repo add --username $CHART_USER --password $CHART_PASSWD mychart $CHART_REP
 helm repo update
 helm upgrade $RELEASE_NAME mychart/$APP_NAME --reuse-values \
   --set image.repository=$REGISTRY/$REGISTRY_NAMESPACE/$APP_NAME-${CONTEXT} \
-  --set image.tag=${CI_COMMIT_SHA:0:8} --wait
+  --set image.tag=${CI_COMMIT_SHA:0:8} --atomic --timeout 90
 
 #kubectl set image deploy $APP_NAME $APP_NAME=$REGISTRY/$REGISTRY_NAMESPACE/${APP_NAME}-${CONTEXT}:${CI_COMMIT_SHA:0:8} || true
