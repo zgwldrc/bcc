@@ -29,7 +29,6 @@ CONTEXT
 KUBECONFIG_CONTENT
 REGISTRY
 REGISTRY_NAMESPACE
-RELEASE_NAME
 '
 
 function check_env(){
@@ -51,11 +50,10 @@ function _init_env(){
 
 check_env $ENV_CHECK_LIST
 _init_env
-
 helm init --client-only
 helm repo add --username $CHART_USER --password $CHART_PASSWD mychart $CHART_REPO
 helm repo update
-helm upgrade $RELEASE_NAME mychart/$APP_NAME --reuse-values \
+helm upgrade ${APP_NAME}-$CONTEXT --install mychart/$APP_NAME --reuse-values \
   --set image.repository=$REGISTRY/$REGISTRY_NAMESPACE/$APP_NAME-${CONTEXT} \
   --set image.tag=${CI_COMMIT_SHA:0:8} --atomic --timeout 90
 
