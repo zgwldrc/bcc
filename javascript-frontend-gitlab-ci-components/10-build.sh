@@ -43,8 +43,8 @@ node -v
 npm -v
 npm install
 npm run d1
-npm run t1
+#npm run t1
 npm run t2
 build d1 d1
-build t1 t1
+#build t1 t1
 build t2 t2
