@@ -34,4 +34,4 @@ function _init_env(){
 check_env $ENV_CHECK_LIST
 _init_env
 
-kubectl set image deploy $APP_NAME $APP_NAME=$REGISTRY/$REGISTRY_NAMESPACE/$APP_NAME:${CI_COMMIT_SHA:0:8} || true
+kubectl set image deploy $APP_NAME $APP_NAME=$REGISTRY/$REGISTRY_NAMESPACE/${APP_NAME}-${CONTEXT}:${CI_COMMIT_SHA:0:8} || true
