@@ -9,7 +9,7 @@ crush-quotation-job                                       jobs/quotation-job    
 crush-statistics-job                                      jobs/statistics-job                                     statistics-job                          0.0.1-SNAPSHOT
 crush-asset-job                                           jobs/asset-job                                          asset-job                               0.0.1-SNAPSHOT
 crush-migration-job                                       jobs/migration-job                                      migration-job                           0.0.1-SNAPSHOT
-crush-migration-from-document-job                                       jobs/migration-from-document-job                                      migration-from-document-job                           0.0.1-SNAPSHOT
+#crush-migration-from-document-job                                       jobs/migration-from-document-job                                      migration-from-document-job                           0.0.1-SNAPSHOT
 crush-update-phone-job                                    jobs/update-phone-job                                update-phone-job                        0.0.1-SNAPSHOT
 crush-update-email-address-job                            jobs/update-email-address-job                           update-email-address-job                0.0.1-SNAPSHOT
 crush-relation-update-job                                 jobs/relation-update-job                                relation-update-job                     0.0.1-SNAPSHOT
