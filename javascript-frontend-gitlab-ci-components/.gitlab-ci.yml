@@ -6,9 +6,9 @@ variables:
   REGISTRY: ""
   REGISTRY_NAMESPACE: ""
   REGISTRY_USER: "AWS"
-  DOCKERFILE_URL: "https://raw.githubusercontent.com/zgwldrc/bcc/master/javascript-frontend-gitlab-ci-components/Dockerfile"
-  BUILD_SCRIPT: "https://raw.githubusercontent.com/zgwldrc/bcc/master/javascript-frontend-gitlab-ci-components/10-build.sh"
-  DEPLOY_SCRIPT: "https://raw.githubusercontent.com/zgwldrc/bcc/master/javascript-frontend-gitlab-ci-components/21-deploy.sh"
+  DOCKERFILE_URL: "https://raw.githubusercontent.com/zgwldrc/bcc/master/javascript-frontend-gitlab-ci-components/Dockerfile.openresty"
+  BUILD_SCRIPT: "https://raw.githubusercontent.com/zgwldrc/bcc/master/javascript-frontend-gitlab-ci-components/14-build.sh"
+  DEPLOY_SCRIPT: "https://raw.githubusercontent.com/zgwldrc/bcc/master/javascript-frontend-gitlab-ci-components/20-deploy.sh"
   ################ SECRET VARIABLES ###############
   # KUBECONFIG_CONTENT
   # REGISTRY_PASSWD or (AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY and AWS_DEFAULT_REGION)
@@ -17,13 +17,13 @@ build:
   stage: build
   only:
   - master
-  image: zgwldrc/npm-and-docker:v0.0.1
+  image: zgwldrc/npm-and-docker:v0.0.2
   cache:
     paths:
       - node_modules/
   script:
   - |
-    curl -s $BUILD_SCRIPT |bash
+    curl -s $BUILD_SCRIPT | bash
 
 deploy:
   environment:
