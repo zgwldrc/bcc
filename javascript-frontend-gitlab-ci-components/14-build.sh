@@ -33,8 +33,7 @@ docker login -u $REGISTRY_USER -p $REGISTRY_PASSWD $REGISTRY
 curl -s "$DOCKERFILE_URL" -o Dockerfile
 
 function build() {
-    local env=$1
-    local build_context=$2
+    local build_context=$1
     local image_url=$REGISTRY/$REGISTRY_NAMESPACE/${APP_NAME}:${CI_COMMIT_SHA:0:8}
     docker build -f Dockerfile -t ${image_url} ${build_context}
     docker push ${image_url}
