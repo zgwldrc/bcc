@@ -10,6 +10,7 @@ crush-statistics-job                                      jobs/statistics-job   
 crush-asset-job                                           jobs/asset-job                                          asset-job                               0.0.1-SNAPSHOT
 crush-loan-job                                           jobs/loan-job                                          loan-job                               0.0.1-SNAPSHOT
 crush-migration-job                                       jobs/migration-job                                      migration-job                           0.0.1-SNAPSHOT
+crush-migration-chat-info-job                             jobs/migration-chat-info-job                           migration-chat-info-job                  0.0.1-SNAPSHOT
 crush-migration-from-document-job                         jobs/migration-from-document-job                      migration-from-document-job            0.0.1-SNAPSHOT
 crush-update-phone-job                                    jobs/update-phone-job                                update-phone-job                        0.0.1-SNAPSHOT
 crush-update-email-address-job                            jobs/update-email-address-job                           update-email-address-job                0.0.1-SNAPSHOT
