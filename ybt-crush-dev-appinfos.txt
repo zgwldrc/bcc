@@ -15,5 +15,6 @@ crush-migration-from-document-job                         jobs/migration-from-do
 crush-update-phone-job                                    jobs/update-phone-job                                update-phone-job                        0.0.1-SNAPSHOT
 crush-update-email-address-job                            jobs/update-email-address-job                           update-email-address-job                0.0.1-SNAPSHOT
 crush-relation-update-job                                 jobs/relation-update-job                                relation-update-job                     0.0.1-SNAPSHOT
+crush-device-job                                       jobs/device-job                                      device-job                           0.0.1-SNAPSHOT
 crush-flyway                                              flyway                                                  flyway                                  2.0.0-SNAPSHOT
 crush-promotiontree  components/promotiontree  promotiontree  0.0.1-SNAPSHOT
