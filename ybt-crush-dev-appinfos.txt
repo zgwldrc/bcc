@@ -19,3 +19,4 @@ crush-device-job                                       jobs/device-job          
 crush-file-job                                       jobs/file-job                                      file-job                           0.0.1-SNAPSHOT
 crush-flyway                                              flyway                                                  flyway                                  2.0.0-SNAPSHOT
 crush-promotiontree  components/promotiontree  promotiontree  0.0.1-SNAPSHOT
+crush-global-pay-migration-job jobs/global-pay-migration-job global-pay-migration-job 0.0.1-SNAPSHOT
